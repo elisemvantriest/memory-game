@@ -6,17 +6,19 @@ import os
 
 # Load images from a folder, resizing them to the target size
 def load_images():
-    folder_path = "C:/Users/etr203/OneDrive - Vrije Universiteit Amsterdam/Documents/1. Onderzoek/Programming/Memory game"
+    # Use the directory where this script is located as the base path
+    folder_path = os.path.join(os.path.dirname(__file__), 'images')
     images = []
     target_size = (160, 160)  # Target size in pixels
+
+    # Iterate over all files in the images directory
     for file_name in os.listdir(folder_path):
         if file_name.endswith(".png"):
             image_path = os.path.join(folder_path, file_name)
-            img = Image.open(image_path).resize(target_size, Image.LANCZOS)  # Resize images to 160x160 pixels
+            img = Image.open(image_path).resize(target_size, Image.LANCZOS)
             images.append(ImageTk.PhotoImage(img))
             print(f"Loaded image: {file_name}")  # Debug statement
     return images
-
 
 class MemoryGame:
     def __init__(self, root):
